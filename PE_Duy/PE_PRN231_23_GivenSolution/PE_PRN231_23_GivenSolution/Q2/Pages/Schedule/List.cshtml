@@ -1,0 +1,42 @@
+﻿@page
+@model Q2.Pages.Schedule.ListModel
+@{
+}
+<form method="get">
+    <input name="dateInput" type="date" />
+    <button type="submit">Get Schedule</button>
+</form>
+
+<h1>Screening schedule on @Model.InputTime</h1>
+<table border="1">
+    <tr>
+        <th></th>
+        @foreach (var item in Model.ListRoom)
+        {
+            <th>@item.Title</th>
+        }
+    </tr>
+    @foreach (var item1 in Model.ListTimeSlot)
+    {
+        <tr>
+            <td>@item1.StartTime - @item1.EndTime</td>
+            @foreach (var item2 in Model.ListRoom)
+            {
+                <td>
+                    @foreach (var schedule in Model.ListSchedule
+                                  .Where(s => s.RoomId == item2.Id 
+                                              && s.TimeSlotId == item1.Id)
+                                  .Join(Model.ListMovies, 
+                                      schedule => schedule.MovieId, 
+                                      movie => movie.Id, 
+                                      (schedule, movie) => new { Schedule = schedule, MovieTitle = movie.Title }))
+                    {
+                        <a href="#">@schedule.MovieTitle</a>
+                    }
+                </td>
+                
+            }
+        </tr>
+    }
+    
+</table>

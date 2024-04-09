@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+</head>
+
+<body>
+    <a class=" mb-3 btn btn-primary" href="index.html">Back to List</a>
+    <h1>Add New Product</h1>
+
+    <form id="addProductForm" class="w-50">
+        <div class="form-group mb-3">
+            <label for="productName">Product Name:</label>
+            <br />
+            <input type="text" class="form-control" id="productName" name="productName" required>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="quantityPerUnit">Quantity Per Unit:</label>
+            <input type="text" class="form-control" id="quantityPerUnit" name="quantityPerUnit">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="unitPrice">Unit Price:</label>
+            <input type="number" class="form-control" id="unitPrice" name="unitPrice" required>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="unitsInStock">Units In Stock:</label>
+            <input type="number" class="form-control" id="unitsInStock" name="unitsInStock" required>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="unitsOnOrder">Units On Order:</label>
+            <input type="number" class="form-control" id="unitsOnOrder" name="unitsOnOrder">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="reorderLevel">Reorder Level:</label>
+            <input type="number" class="form-control" id="reorderLevel" name="reorderLevel">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="discontinued">Discontinued:</label>
+            <input type="checkbox" id="discontinued" name="discontinued">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="categoryName">Category Name:</label>
+            <input type="text" class="form-control" id="categoryName" name="categoryName">
+        </div>
+
+        <button type="button" class="btn btn-primary" onclick="addProduct()">Add Product</button>
+    </form>
+
+    <script>
+        function addProduct() {
+            // Retrieve values from the form
+            const productName = document.getElementById('productName').value;
+            const quantityPerUnit = document.getElementById('quantityPerUnit').value;
+            const unitPrice = document.getElementById('unitPrice').value;
+            const unitsInStock = document.getElementById('unitsInStock').value;
+            const unitsOnOrder = document.getElementById('unitsOnOrder').value;
+            const reorderLevel = document.getElementById('reorderLevel').value;
+            const discontinued = document.getElementById('discontinued').checked;
+            const category = document.getElementById('categoryName').value;
+
+            // Create a new product object
+            const newProduct = {
+                productName,
+                quantityPerUnit,
+                unitPrice,
+                unitsInStock,
+                unitsOnOrder,
+                reorderLevel,
+                discontinued,
+                category
+            };
+            console.log(newProduct)
+            // Perform the logic to send the new product data to your API endpoint
+            fetch('http://localhost:5228/api/Products', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newProduct),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    window.location.href = 'http://localhost:5500/';
+                })
+        }
+    </script>
+
+</body>
+
+</html>

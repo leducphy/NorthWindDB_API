@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "yYA5bHax1o4G5GYnuFmCp99pbgV5yul7mP30U2hHngk=",
+  "Source": "NorthWindDB",
+  "BasePath": "_content/NorthWindDB",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

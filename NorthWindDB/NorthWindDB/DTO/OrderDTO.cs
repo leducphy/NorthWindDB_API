@@ -2,25 +2,29 @@
 {
     public class OrderDTO
     {
-        public int OrderId { get; set; }
-        public DateTime? OrderDate { get; set; }
-
-        public string CustomerName { get; set; }
-
-        public string ProductName { get; set; }
-
-        public decimal? Price { get; set; }
-
-        public int? quantity { get; set; }
-
-        public OrderDTO(int orderId, DateTime? orderDate, string customerName, string productName, decimal? price, int? quantity)
+        public OrderDTO()
         {
-            OrderId = orderId;
-            OrderDate = orderDate;
-            CustomerName = customerName;
-            ProductName = productName;
-            Price = price;
-            this.quantity = quantity;
+            
         }
+        public int OrderId { get; set; }
+        public int EmployeeId { get; set; }
+        public string EmployeeName { get; set; }
+        public string CustomerId { get; set; }
+        public string CustomerName { get; set; }
+        public DateTime? OrderDate { get; set; }
+        public DateTime? RequiredDate { get; set; }
+        public DateTime? ShippedDate { get; set; }
+        public int? ShipVia { get; set; }
+        public string? ShipCompanyName { get; set; }
+        public decimal? Freight { get; set; }
+        public string? ShipName { get; set; }
+        public string? ShipAddress { get; set; }
+        public string? ShipCity { get; set; }
+        public string? ShipRegion { get; set; }
+        public string? ShipPostalCode { get; set; }
+        public string? ShipCountry { get; set; }
+        public double? TotalAmount { get; set; } 
+        public bool? IsLateDate { get; set; }
+       
     }
 }

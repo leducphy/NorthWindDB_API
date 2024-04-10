@@ -68,7 +68,11 @@ namespace NorthWindDB.Controllers
         public async Task<ActionResult<ProductDTO>> UpdateProduct([FromRoute] int id, [FromForm] UpdateProductDTO pd)
         {
             var p = _mapper.Map<Product>(pd);
-            p.Category = _context.Categories.FirstOrDefault(c => c.CategoryName.Equals(pd.Category));
+            var cate = _context.Categories.Find(pd.CategoryId);
+            if (cate == null)
+            {
+                return StatusCode(409, $"Category ID invalid");
+            }
             p.ProductId = id;
             _context.Entry(p).State = EntityState.Modified;
 
@@ -121,7 +125,7 @@ namespace NorthWindDB.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, $"An error occurred while processing your request. Bug : {e}");
+                return StatusCode(409, $"An error occurred while processing your request. Bug : {e}");
             }
         }
 

@@ -277,3 +277,4 @@ D:\PRN231\NorthWindDB\NorthWindDB\obj\Debug\net6.0\refint\NorthWindDB.dll
 D:\PRN231\NorthWindDB\NorthWindDB\obj\Debug\net6.0\NorthWindDB.pdb
 D:\PRN231\NorthWindDB\NorthWindDB\obj\Debug\net6.0\NorthWindDB.genruntimeconfig.cache
 D:\PRN231\NorthWindDB\NorthWindDB\obj\Debug\net6.0\ref\NorthWindDB.dll
+D:\PRN231\NorthWindDB\NorthWindDB\obj\Debug\net6.0\NorthWindDB.sourcelink.json

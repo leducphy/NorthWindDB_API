@@ -23,4 +23,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\api\Controllers\" />
+    <Folder Include="Areas\api\Data\" />
+    <Folder Include="Areas\api\Models\" />
+    <Folder Include="Areas\api\Views\" />
+  </ItemGroup>
+
 </Project>

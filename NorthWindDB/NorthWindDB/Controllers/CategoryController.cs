@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using Microsoft.EntityFrameworkCore;
 using NorthWindDB.DTO;
 using NorthWindDB.Models;
@@ -19,10 +20,14 @@ namespace NorthWindDB.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("Category")]
+        [HttpGet("Category"), EnableQuery]
         public IActionResult ListCategory()
         {
-            return Ok(_context.Categories.ToList());
+            
+            return Ok(_mapper.Map<List<CategoryDTO>>(
+                _context.Categories
+                    .Include(x => x.Products)
+                    .AsQueryable()));
         }
 
         [HttpGet("Category/{id}")]

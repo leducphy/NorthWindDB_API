@@ -114,6 +114,16 @@ namespace NorthWindDB.Controllers
             }
         }
 
+        [HttpGet("GetOrderByProductId/{id}")]
+        public async Task<IActionResult> GetOrderByProductId(int id)
+        {
+            var orders = _context.OrderDetails
+                .Include(x => x.Product)
+                .Where(x => x.ProductId == id).ToList();
+            var map = _mapper.Map<List<OrderDetailDTO>>(orders);
+            Console.WriteLine(map);
+            return Ok(map);
+        }
         
     }
 }

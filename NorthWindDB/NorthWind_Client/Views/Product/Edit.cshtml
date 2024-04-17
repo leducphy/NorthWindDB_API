@@ -1,0 +1,63 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using NorthWind_Client.Models
+@{
+    var categories = ViewBag.Categories as List<Response.CategoryDTO>;
+}
+<div class="container mt-5">
+    <a asp-controller="Product" asp-action="Index" class="btn btn-primary">Go Back</a>
+    <h2>Update Product</h2>
+    <form asp-action="Edit" asp-controller="Product" method="post">
+        <input type="hidden" name="productUpdateId" value="@Model.ProductId"/>
+        <div class="mb-3">
+            <label for="productName" class="form-label">Product Name:</label>
+            <input type="text" class="form-control" id="productName" name="ProductName" value="@Model.ProductName">
+        </div>
+        <div class="mb-3">
+            <label for="quantityPerUnit" class="form-label">Quantity Per Unit:</label>
+            <input type="text" class="form-control" id="quantityPerUnit" name="QuantityPerUnit" value="@Model.QuantityPerUnit">
+        </div>
+        <div class="mb-3">
+            <label for="unitPrice" class="form-label">Unit Price:</label>
+            <input type="number" class="form-control" id="unitPrice" name="UnitPrice" value="@Model.UnitPrice">
+        </div>
+        <div class="mb-3">
+            <label for="unitsInStock" class="form-label">Units In Stock:</label>
+            <input type="number" class="form-control" id="unitsInStock" name="UnitsInStock" value="@Model.UnitsInStock">
+        </div>
+        <div class="mb-3">
+            <label for="unitsOnOrder" class="form-label">Units On Order:</label>
+            <input type="number" class="form-control" id="unitsOnOrder" name="UnitsOnOrder" value="@Model.UnitsOnOrder">
+        </div>
+        <div class="mb-3">
+            <label for="reorderLevel" class="form-label">Reorder Level:</label>
+            <input type="number" class="form-control" id="reorderLevel" name="ReorderLevel" value="@Model.ReorderLevel">
+        </div>
+        <div class="mb-3">
+            <label for="discontinued" class="form-label">Discontinued:</label>
+            @{
+                var discontinuedValue = Model.Discontinued ? "true" : "false";
+            }
+            <select id="discontinued" class="form-select" name="Discontinued">
+                <option value="true" selected="@(discontinuedValue == "true" ? "selected" : null)">True</option>
+                <option value="false" selected="@(discontinuedValue == "false" ? "selected" : null)">False</option>
+            </select>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="categoryDropdown" class="form-label">Select Category:</label>
+            @{
+                var selectedCategoryId = Model.CategoryId;
+            }
+            <select id="categoryDropdown" class="form-select" name="CategoryId">
+                @foreach (var item in categories)
+                {
+                    var isSelected = item.CategoryId == selectedCategoryId ? "selected" : "";
+                    <option value="@item.CategoryId" selected="@isSelected">@item.CategoryName</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Product</button>
+    </form>
+</div>

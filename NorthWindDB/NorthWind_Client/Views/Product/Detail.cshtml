@@ -1,0 +1,49 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using NorthWind_Client.Models
+@{
+var products = ViewBag.Products as Response.ProductResponse;
+var orders = ViewBag.Orders as List<Response.OrderDetailResponse>;
+
+// Assuming there's only one product in the list for simplicity
+
+}
+<div class="container">
+    <a asp-controller="Product" asp-action="Index" class="btn btn-primary">Go Back</a>
+    <h1>Order Table for Product: @products.ProductName (Product ID: @products.ProductId)</h1>
+    <h3>Product Details:</h3>
+    <ul>
+        <li><strong>Product Name:</strong> @products.ProductName</li>
+        <li><strong>Category:</strong> @products.CategoryName</li>
+        <li><strong>Supplier:</strong> @products.SupplierName</li>
+        <li><strong>Unit Price:</strong> $@products.UnitPrice</li>
+        <li><strong>Total Units Sold:</strong> @products.TotalUnitSaled</li>
+        <li><strong>Quantity Per Unit:</strong> @products.QuantityPerUnit</li>
+        <li><strong>Units In Stock:</strong> @products.UnitsInStock</li>
+    </ul>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Product ID</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>Discount</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+        <tbody id="orderTableBody">
+        @foreach (var order in orders)
+        {
+            <tr>
+                <td>@order.OrderId</td>
+                <td>@order.ProductId</td>
+                <td>@order.UnitPrice</td>
+                <td>@order.Quantity</td>
+                <td>@order.Discount</td>
+                <td>@(order.UnitPrice * order.Quantity * (decimal)(1 - order.Discount))</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

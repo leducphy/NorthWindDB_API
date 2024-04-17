@@ -1,9 +1,13 @@
-﻿namespace NorthWindDB.DTO
+﻿using System.Text.Json.Serialization;
+
+namespace NorthWindDB.DTO
 {
     public class CategoryDTO
     {
-        
+        public int CategoryId { get; set; }
         public string CategoryName { get; set; } = null!;
         public string? Description { get; set; }
+        public byte[]? Picture { get; set; }
+        public List<ProductDTO>? Products { get; set; }
     }
 }

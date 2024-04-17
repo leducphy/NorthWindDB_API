@@ -1,0 +1,52 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using NorthWind_Client.Models
+@{
+    var categories = ViewBag.Categories as List<Response.CategoryDTO>;
+}
+<div class="container mt-5">
+    <a asp-controller="Product" asp-action="Index" class="btn btn-primary">Go Back</a>
+    <h2>Add New Product</h2>
+    <form asp-action="Add" asp-controller="Product" method="post">
+        <div class="mb-3">
+            <label for="productName" class="form-label">Product Name:</label>
+            <input type="text" class="form-control" id="productName" name="product.ProductName">
+        </div>
+        <div class="mb-3">
+            <label for="quantityPerUnit" class="form-label">Quantity Per Unit:</label>
+            <input type="text" class="form-control" id="quantityPerUnit" name="product.QuantityPerUnit">
+        </div>
+        <div class="mb-3">
+            <label for="unitPrice" class="form-label">Unit Price:</label>
+            <input type="number" class="form-control" id="unitPrice" name="product.UnitPrice">
+        </div>
+        <div class="mb-3">
+            <label for="unitsInStock" class="form-label">Units In Stock:</label>
+            <input type="number" class="form-control" id="unitsInStock" name="product.UnitsInStock">
+        </div>
+        <div class="mb-3">
+            <label for="unitsOnOrder" class="form-label">Units On Order:</label>
+            <input type="number" class="form-control" id="unitsOnOrder" name="product.UnitsOnOrder">
+        </div>
+        <div class="mb-3">
+            <label for="reorderLevel" class="form-label">Reorder Level:</label>
+            <input type="number" class="form-control" id="reorderLevel" name="product.ReorderLevel">
+        </div>
+        <div class="mb-3">
+            <label for="discontinued" class="form-label">Discontinued:</label>
+            <select id="discontinued" class="form-select" name="product.Discontinued">
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="categoryDropdown" class="form-label">Select Category:</label>
+            <select id="categoryDropdown" class="form-select" name="product.CategoryID">
+                @foreach (var item in categories)
+                {
+                    <option value="@item.CategoryId">@item.CategoryName</option>
+                }
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Product</button>
+    </form>
+</div>

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using NorthWindDB.DTO;
@@ -20,7 +21,7 @@ namespace NorthWindDB.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet, EnableQuery]
         public async Task<ActionResult<List<ProductDTO>>> GetProducts()
         {
             return _mapper.Map<List<ProductDTO>>(
@@ -28,7 +29,7 @@ namespace NorthWindDB.Controllers
                     .Include(p => p.Category)
                     .Include(s => s.Supplier)
                     .Include(od => od.OrderDetails)
-                    .ToList()
+                    .AsQueryable()
             );
         }
 
@@ -55,20 +56,20 @@ namespace NorthWindDB.Controllers
         [HttpPost]
         public async Task<ActionResult<ProductDTO>> AddProduct([FromBody] AddProductDTO apd)
         {
-            var c = _context.Categories.FirstOrDefault(c => c.CategoryName.Equals(apd.Category))!;
+            var c = _context.Categories.FirstOrDefault(c => c.CategoryId == apd.CategoryID)!;
 
             var product = _mapper.Map<Product>(apd);
             product.Category = c;
             _context.Products.Add(product);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return _mapper.Map<ProductDTO>(product);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<ProductDTO>> UpdateProduct([FromRoute] int id, [FromForm] UpdateProductDTO pd)
+        public async Task<ActionResult<ProductDTO>> UpdateProduct([FromRoute] int id, UpdateProductDTO pd)
         {
             var p = _mapper.Map<Product>(pd);
-            var cate = _context.Categories.Find(pd.CategoryId);
+            var cate = await _context.Categories.FindAsync(pd.CategoryId);
             if (cate == null)
             {
                 return StatusCode(409, $"Category ID invalid");

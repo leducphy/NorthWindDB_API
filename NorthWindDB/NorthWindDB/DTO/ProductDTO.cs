@@ -14,6 +14,12 @@
         public String SupplierName { get; set; }
         public decimal? UnitPrice { get; set; }
         public int TotalUnitSaled { get; set; }
+        public bool Discontinued { get; set; }
+        public string QuantityPerUnit { get; set; }
+        public short? UnitsInStock { get; set; }
+        public short? UnitsOnOrder { get; set; }
+        public short? ReorderLevel { get; set; }
+        public CategoryDTO Category { get; set; }
     }
 
     public class AddProductDTO
@@ -29,7 +35,7 @@
         public short? UnitsOnOrder { get; set; }
         public short? ReorderLevel { get; set; }
         public bool Discontinued { get; set; }
-        public String Category { get; set; }
+        public int CategoryID { get; set; }
     }
 
     public class UpdateProductDTO

@@ -1,0 +1,82 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using NorthWind_Client.Models
+@{
+    var customers = ViewBag.Customers as List<Response.CustomerDTO>;
+    var employees = ViewBag.Employees as List<Response.EmployeeDTO>;
+    var orders = ViewBag.Orders as List<Response.OrderDTO>;
+}
+
+<form asp-controller="Order" asp-action="Index" >
+
+    <div class="mb-3 col-md-6">
+        <label for="" class="form-label">Select Customers:</label>
+        <select id="customerDropdown" class="form-select" name="CustomerID">
+            <option value="">All Customers</option>
+            @foreach (var item in customers)
+            {
+            <option value="@item.CustomerId">@item.ContactName</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3 col-md-6">
+        <label for="" class="form-label">Select Employee:</label>
+        <select id="employeeDropdown" class="form-select" name="EmployeeID">
+            <option value="">All Employees</option>
+            @foreach (var item in employees)
+            {
+            <option value="@item.EmployeeId">@item.FirstName @item.LastName</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3 col-md-6">
+        <label for="orderDateFrom" class="form-label">Order Date From:</label>
+        <input type="date" class="form-control" id="orderDateFrom" name="dateTimeFrom">
+
+        <label for="orderDateTo" class="form-label">Order Date To:</label>
+        <input type="date" class="form-control" id="orderDateTo" name="dateTimeTo">
+        <input type="date" class="form-control" id="orderDateTo" name="dateTimeTo">
+
+        <button type="submit" class="btn btn-primary mt-3"  >Filter</button>
+    </div>
+
+</form>
+
+
+<div class="container mt-5">
+    <h2>Item List</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>Customer ID</th>
+            <th>Customer Name</th>
+            <th>Order Date</th>
+            <th>Total Amount</th>
+            <th>Total Item</th>
+            <th>Is Late Date</th>
+        </tr>
+        </thead>
+        <tbody id="item-list">
+        @foreach (var item in orders)
+        {
+        <tr>
+            <td>@item.OrderId</td>
+            <td>@item.EmployeeId</td>
+            <td>@item.EmployeeName</td>
+            <td>@item.CustomerId</td>
+            <td>@item.CustomerName</td>
+            <td>@item.OrderDate</td>
+            <td>@item.TotalAmount</td>
+            <td>@item.TotalItem</td>
+            @* <td>@(item.IsLateDate ? "Yes" : "No")</td> *@
+        </tr>
+        }
+        </tbody>
+    </table>
+
+</div>
+

@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using NorthWindDB.DTO;
@@ -18,6 +19,24 @@ namespace NorthWindDB.Controllers
         {
             _context = context;
             _mapper = mapper;
+        }
+
+        [HttpGet, EnableQuery]
+        public async Task<IActionResult> GetOrders()
+        {
+            // Retrieve orders with related entities included
+            var orders = await _context.Orders
+                .Include(o => o.Customer)
+                .Include(o => o.Employee)
+                .Include(o => o.OrderDetails)
+                .ThenInclude(od => od.Product) // Assuming OrderDetails has a navigation property to Product
+                .Include(o => o.ShipViaNavigation)
+                .ToListAsync();
+
+            // Map the orders to DTOs
+            var orderDTOs = _mapper.Map<List<OrderDTO>>(orders);
+
+            return Ok(orderDTOs);
         }
 
         [HttpGet("{id}")]

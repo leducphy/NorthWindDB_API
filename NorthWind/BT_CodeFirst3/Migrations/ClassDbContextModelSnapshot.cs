@@ -51,6 +51,168 @@ namespace BT_CodeFirst3.Migrations
                     b.HasIndex("MaMH");
 
                     b.ToTable("KetQuas");
+
+                    b.HasData(
+                        new
+                        {
+                            MaSV = "SV01",
+                            MaMH = "CSDL",
+                            LanThi = (byte)1,
+                            Diem = 3m,
+                            KQ = ""
+                        },
+                        new
+                        {
+                            MaSV = "SV01",
+                            MaMH = "CSDL",
+                            LanThi = (byte)2,
+                            Diem = 6m,
+                            KQ = ""
+                        },
+                        new
+                        {
+                            MaSV = "SV01",
+                            MaMH = "TTNT",
+                            LanThi = (byte)1,
+                            Diem = 5m,
+                            KQ = ""
+                        },
+                        new
+                        {
+                            MaSV = "SV01",
+                            MaMH = "TTNT",
+                            LanThi = (byte)2,
+                            Diem = 6m,
+                            KQ = ""
+                        },
+                        new
+                        {
+                            MaSV = "SV01",
+                            MaMH = "MMT",
+                            LanThi = (byte)1,
+                            Diem = 5m,
+                            KQ = ""
+                        },
+                        new
+                        {
+                            MaSV = "SV02",
+                            MaMH = "CSDL",
+                            LanThi = (byte)1,
+                            Diem = 4m,
+                            KQ = ""
+                        },
+                        new
+                        {
+                            MaSV = "SV02",
+                            MaMH = "CSDL",
+                            LanThi = (byte)2,
+                            Diem = 7m,
+                            KQ = ""
+                        },
+                        new
+                        {
+                            MaSV = "SV02",
+                            MaMH = "MMT",
+                            LanThi = (byte)1,
+                            Diem = 10m,
+                            KQ = ""
+                        },
+                        new
+                        {
+                            MaSV = "SV02",
+                            MaMH = "CTDL",
+                            LanThi = (byte)1,
+                            Diem = 9m,
+                            KQ = ""
+                        },
+                        new
+                        {
+                            MaSV = "SV03",
+                            MaMH = "CSDL",
+                            LanThi = (byte)1,
+                            Diem = 2m,
+                            KQ = ""
+                        },
+                        new
+                        {
+                            MaSV = "SV03",
+                            MaMH = "CSDL",
+                            LanThi = (byte)2,
+                            Diem = 5m,
+                            KQ = ""
+                        },
+                        new
+                        {
+                            MaSV = "SV03",
+                            MaMH = "MMT",
+                            LanThi = (byte)1,
+                            Diem = 2m,
+                            KQ = ""
+                        },
+                        new
+                        {
+                            MaSV = "SV03",
+                            MaMH = "MMT",
+                            LanThi = (byte)2,
+                            Diem = 4m,
+                            KQ = ""
+                        },
+                        new
+                        {
+                            MaSV = "SV04",
+                            MaMH = "CSDL",
+                            LanThi = (byte)1,
+                            Diem = 4m,
+                            KQ = ""
+                        },
+                        new
+                        {
+                            MaSV = "SV04",
+                            MaMH = "CTDL",
+                            LanThi = (byte)1,
+                            Diem = 10m,
+                            KQ = ""
+                        },
+                        new
+                        {
+                            MaSV = "SV05",
+                            MaMH = "CSDL",
+                            LanThi = (byte)1,
+                            Diem = 7m,
+                            KQ = ""
+                        },
+                        new
+                        {
+                            MaSV = "SV05",
+                            MaMH = "MMT",
+                            LanThi = (byte)1,
+                            Diem = 2m,
+                            KQ = ""
+                        },
+                        new
+                        {
+                            MaSV = "SV05",
+                            MaMH = "MMT",
+                            LanThi = (byte)2,
+                            Diem = 5m,
+                            KQ = ""
+                        },
+                        new
+                        {
+                            MaSV = "SV06",
+                            MaMH = "TTNT",
+                            LanThi = (byte)1,
+                            Diem = 6m,
+                            KQ = ""
+                        },
+                        new
+                        {
+                            MaSV = "SV06",
+                            MaMH = "DHMT",
+                            LanThi = (byte)1,
+                            Diem = 10m,
+                            KQ = ""
+                        });
                 });
 
             modelBuilder.Entity("BT_CodeFirst3.Models.Khoa", b =>
@@ -72,6 +234,38 @@ namespace BT_CodeFirst3.Migrations
                     b.HasKey("MaKH");
 
                     b.ToTable("Khoas");
+
+                    b.HasData(
+                        new
+                        {
+                            MaKH = "HTTT",
+                            SLSV = 0,
+                            TenKH = "Hệ thống thông tin"
+                        },
+                        new
+                        {
+                            MaKH = "MANG",
+                            SLSV = 0,
+                            TenKH = "Mạng và truyền thông"
+                        },
+                        new
+                        {
+                            MaKH = "CNPM",
+                            SLSV = 0,
+                            TenKH = "Công nghệ phần mềm"
+                        },
+                        new
+                        {
+                            MaKH = "KTMT",
+                            SLSV = 0,
+                            TenKH = "Kỹ thuật máy tính"
+                        },
+                        new
+                        {
+                            MaKH = "KHMT",
+                            SLSV = 0,
+                            TenKH = "Khoa học máy tính"
+                        });
                 });
 
             modelBuilder.Entity("BT_CodeFirst3.Models.MonHoc", b =>
@@ -93,6 +287,38 @@ namespace BT_CodeFirst3.Migrations
                     b.HasKey("MaMH");
 
                     b.ToTable("MonHocs");
+
+                    b.HasData(
+                        new
+                        {
+                            MaMH = "CSDL",
+                            SoTiet = (byte)45,
+                            TenMH = "Cơ sở dữ liệu"
+                        },
+                        new
+                        {
+                            MaMH = "TTNT",
+                            SoTiet = (byte)45,
+                            TenMH = "Trí tuệ nhân tạo"
+                        },
+                        new
+                        {
+                            MaMH = "MMT",
+                            SoTiet = (byte)45,
+                            TenMH = "Mạng máy tính"
+                        },
+                        new
+                        {
+                            MaMH = "DHMT",
+                            SoTiet = (byte)60,
+                            TenMH = "Đồ họa máy tính"
+                        },
+                        new
+                        {
+                            MaMH = "CTDL",
+                            SoTiet = (byte)60,
+                            TenMH = "Cấu trúc dữ liệu"
+                        });
                 });
 
             modelBuilder.Entity("BT_CodeFirst3.Models.SinhVien", b =>
@@ -146,6 +372,104 @@ namespace BT_CodeFirst3.Migrations
                     b.HasIndex("MaKH");
 
                     b.ToTable("SinhViens");
+
+                    b.HasData(
+                        new
+                        {
+                            MaSV = "SV01",
+                            DiemTB = 0m,
+                            HoSV = "Lê Kim",
+                            HocBong = 130000m,
+                            MaKH = "HTTT",
+                            NGSinh = new DateTime(1990, 2, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NoiSinh = "Hà Nội",
+                            Phai = "Nữ",
+                            TenSV = "Lan"
+                        },
+                        new
+                        {
+                            MaSV = "SV02",
+                            DiemTB = 0m,
+                            HoSV = "Trần Minh",
+                            HocBong = 150000m,
+                            MaKH = "MANG",
+                            NGSinh = new DateTime(1992, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NoiSinh = "Bình Định",
+                            Phai = "Nam",
+                            TenSV = "Chánh"
+                        },
+                        new
+                        {
+                            MaSV = "SV03",
+                            DiemTB = 0m,
+                            HoSV = "Lê An",
+                            HocBong = 170000m,
+                            MaKH = "HTTT",
+                            NGSinh = new DateTime(1991, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NoiSinh = "Hải Phòng",
+                            Phai = "Nữ",
+                            TenSV = "Tuyết"
+                        },
+                        new
+                        {
+                            MaSV = "SV04",
+                            DiemTB = 0m,
+                            HoSV = "Trần Anh",
+                            HocBong = 80000m,
+                            MaKH = "MANG",
+                            NGSinh = new DateTime(1993, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NoiSinh = "TpHCM",
+                            Phai = "Nam",
+                            TenSV = "Tuấn"
+                        },
+                        new
+                        {
+                            MaSV = "SV05",
+                            DiemTB = 0m,
+                            HoSV = "Trần Thị",
+                            HocBong = 0m,
+                            MaKH = "CNPM",
+                            NGSinh = new DateTime(1991, 8, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NoiSinh = "TpHCM",
+                            Phai = "Nữ",
+                            TenSV = "Mai"
+                        },
+                        new
+                        {
+                            MaSV = "SV06",
+                            DiemTB = 0m,
+                            HoSV = "Lê Thị Thu",
+                            HocBong = 0m,
+                            MaKH = "HTTT",
+                            NGSinh = new DateTime(1991, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NoiSinh = "An Giang",
+                            Phai = "Nữ",
+                            TenSV = "Thủy"
+                        },
+                        new
+                        {
+                            MaSV = "SV07",
+                            DiemTB = 0m,
+                            HoSV = "Nguyễn Kim",
+                            HocBong = 180000m,
+                            MaKH = "CNPM",
+                            NGSinh = new DateTime(1990, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NoiSinh = "Hà Nội",
+                            Phai = "Nữ",
+                            TenSV = "Thư"
+                        },
+                        new
+                        {
+                            MaSV = "SV08",
+                            DiemTB = 0m,
+                            HoSV = "Lê Văn",
+                            HocBong = 190000m,
+                            MaKH = "HTTT",
+                            NGSinh = new DateTime(1992, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NoiSinh = "TpHCM",
+                            Phai = "Nam",
+                            TenSV = "Long"
+                        });
                 });
 
             modelBuilder.Entity("BT_CodeFirst3.Models.KetQua", b =>

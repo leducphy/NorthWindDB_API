@@ -33,8 +33,11 @@ namespace NorthWindDB.Mapper
                 .ForMember(o => o.TotalAmount,
                     opt => opt.MapFrom(src => src.OrderDetails.Sum(od => od.Quantity * od.UnitPrice)))
                 .ForMember(o => o.IsLateDate, opt => opt.MapFrom(src => src.ShippedDate > src.RequiredDate))
+                .ForMember(o => o.TotalItem, opt => opt.MapFrom(src => src.OrderDetails.Sum(od => od.Quantity)))
                 ;
             CreateMap<OrderDetail, OrderDetailDTO>();
+            CreateMap<Customer, CustomerDTO>();
+            CreateMap<Employee, EmployeeDTO>();
         }
     }
 }

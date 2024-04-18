@@ -23,8 +23,10 @@
         public string? ShipRegion { get; set; }
         public string? ShipPostalCode { get; set; }
         public string? ShipCountry { get; set; }
-        public double? TotalAmount { get; set; } 
+        public double? TotalAmount { get; set; }
+        public int TotalItem { get; set; }
         public bool? IsLateDate { get; set; }
+       
        
     }
     public  class OrderDetailDTO

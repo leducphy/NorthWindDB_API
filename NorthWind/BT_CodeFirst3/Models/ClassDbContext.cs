@@ -80,5 +80,98 @@ public class ClassDbContext : DbContext
                 .HasForeignKey(d => d.MaMH)
                 .HasConstraintName("FK_KetQua_MonHoc");
         });
+        SeedData(modelBuilder);
+    }
+
+    private void SeedData(ModelBuilder modelBuilder)
+    {
+        // Seed Khoa
+        modelBuilder.Entity<Khoa>().HasData(
+            new Khoa { MaKH = "HTTT", TenKH = "Hệ thống thông tin", SLSV = 0 },
+            new Khoa { MaKH = "MANG", TenKH = "Mạng và truyền thông", SLSV = 0 },
+            new Khoa { MaKH = "CNPM", TenKH = "Công nghệ phần mềm", SLSV = 0 },
+            new Khoa { MaKH = "KTMT", TenKH = "Kỹ thuật máy tính", SLSV = 0 },
+            new Khoa { MaKH = "KHMT", TenKH = "Khoa học máy tính", SLSV = 0 }
+        );
+
+
+        // Seed MonHoc
+        modelBuilder.Entity<MonHoc>().HasData(
+            new MonHoc { MaMH = "CSDL", TenMH = "Cơ sở dữ liệu", SoTiet = 45 },
+            new MonHoc { MaMH = "TTNT", TenMH = "Trí tuệ nhân tạo", SoTiet = 45 },
+            new MonHoc { MaMH = "MMT", TenMH = "Mạng máy tính", SoTiet = 45 },
+            new MonHoc { MaMH = "DHMT", TenMH = "Đồ họa máy tính", SoTiet = 60 },
+            new MonHoc { MaMH = "CTDL", TenMH = "Cấu trúc dữ liệu", SoTiet = 60 }
+        );
+
+
+        // Seed SinhVien
+        modelBuilder.Entity<SinhVien>().HasData(
+            new SinhVien
+            {
+                MaSV = "SV01", HoSV = "Lê Kim", TenSV = "Lan", Phai = "Nữ", NGSinh = new DateTime(1990, 2, 23),
+                NoiSinh = "Hà Nội", MaKH = "HTTT", HocBong = 130000, DiemTB = 0
+            },
+            new SinhVien
+            {
+                MaSV = "SV02", HoSV = "Trần Minh", TenSV = "Chánh", Phai = "Nam", NGSinh = new DateTime(1992, 12, 24),
+                NoiSinh = "Bình Định", MaKH = "MANG", HocBong = 150000, DiemTB = 0
+            },
+            new SinhVien
+            {
+                MaSV = "SV03", HoSV = "Lê An", TenSV = "Tuyết", Phai = "Nữ", NGSinh = new DateTime(1991, 2, 21),
+                NoiSinh = "Hải Phòng", MaKH = "HTTT", HocBong = 170000, DiemTB = 0
+            },
+            new SinhVien
+            {
+                MaSV = "SV04", HoSV = "Trần Anh", TenSV = "Tuấn", Phai = "Nam", NGSinh = new DateTime(1993, 12, 20),
+                NoiSinh = "TpHCM", MaKH = "MANG", HocBong = 80000, DiemTB = 0
+            },
+            new SinhVien
+            {
+                MaSV = "SV05", HoSV = "Trần Thị", TenSV = "Mai", Phai = "Nữ", NGSinh = new DateTime(1991, 8, 12),
+                NoiSinh = "TpHCM", MaKH = "CNPM", HocBong = 0, DiemTB = 0
+            },
+            new SinhVien
+            {
+                MaSV = "SV06", HoSV = "Lê Thị Thu", TenSV = "Thủy", Phai = "Nữ", NGSinh = new DateTime(1991, 1, 2),
+                NoiSinh = "An Giang", MaKH = "HTTT", HocBong = 0, DiemTB = 0
+            },
+            new SinhVien
+            {
+                MaSV = "SV07", HoSV = "Nguyễn Kim", TenSV = "Thư", Phai = "Nữ", NGSinh = new DateTime(1990, 2, 2),
+                NoiSinh = "Hà Nội", MaKH = "CNPM", HocBong = 180000, DiemTB = 0
+            },
+            new SinhVien
+            {
+                MaSV = "SV08", HoSV = "Lê Văn", TenSV = "Long", Phai = "Nam", NGSinh = new DateTime(1992, 12, 8),
+                NoiSinh = "TpHCM", MaKH = "HTTT", HocBong = 190000, DiemTB = 0
+            }
+        );
+
+
+        // Seed KetQua
+        modelBuilder.Entity<KetQua>().HasData(
+            new KetQua { MaSV = "SV01", MaMH = "CSDL", LanThi = 1, Diem = 3, KQ = ""},
+            new KetQua { MaSV = "SV01", MaMH = "CSDL", LanThi = 2, Diem = 6 , KQ = ""},
+            new KetQua { MaSV = "SV01", MaMH = "TTNT", LanThi = 1, Diem = 5 , KQ = ""},
+            new KetQua { MaSV = "SV01", MaMH = "TTNT", LanThi = 2, Diem = 6 , KQ = ""},
+            new KetQua { MaSV = "SV01", MaMH = "MMT", LanThi = 1, Diem = 5 , KQ = ""},
+            new KetQua { MaSV = "SV02", MaMH = "CSDL", LanThi = 1, Diem = 4 , KQ = ""},
+            new KetQua { MaSV = "SV02", MaMH = "CSDL", LanThi = 2, Diem = 7 , KQ = ""},
+            new KetQua { MaSV = "SV02", MaMH = "MMT", LanThi = 1, Diem = 10 , KQ = ""},
+            new KetQua { MaSV = "SV02", MaMH = "CTDL", LanThi = 1, Diem = 9 , KQ = ""},
+            new KetQua { MaSV = "SV03", MaMH = "CSDL", LanThi = 1, Diem = 2 , KQ = ""},
+            new KetQua { MaSV = "SV03", MaMH = "CSDL", LanThi = 2, Diem = 5 , KQ = ""},
+            new KetQua { MaSV = "SV03", MaMH = "MMT", LanThi = 1, Diem = 2 , KQ = ""},
+            new KetQua { MaSV = "SV03", MaMH = "MMT", LanThi = 2, Diem = 4, KQ = "" },
+            new KetQua { MaSV = "SV04", MaMH = "CSDL", LanThi = 1, Diem = 4 , KQ = ""},
+            new KetQua { MaSV = "SV04", MaMH = "CTDL", LanThi = 1, Diem = 10, KQ = "" },
+            new KetQua { MaSV = "SV05", MaMH = "CSDL", LanThi = 1, Diem = 7 , KQ = ""},
+            new KetQua { MaSV = "SV05", MaMH = "MMT", LanThi = 1, Diem = 2 , KQ = ""},
+            new KetQua { MaSV = "SV05", MaMH = "MMT", LanThi = 2, Diem = 5 , KQ = ""},
+            new KetQua { MaSV = "SV06", MaMH = "TTNT", LanThi = 1, Diem = 6 , KQ = ""},
+            new KetQua { MaSV = "SV06", MaMH = "DHMT", LanThi = 1, Diem = 10, KQ = "" }
+        );
     }
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NorthWindDB")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d3d4018d0e4e3387ee917869416a4294b7285c0e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8813731cbe11e45cc254f6cbd70bac43997f8648")]
 [assembly: System.Reflection.AssemblyProductAttribute("NorthWindDB")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NorthWindDB")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

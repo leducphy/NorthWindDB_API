@@ -29,7 +29,7 @@ namespace NorthWindDB.Controllers
                 .Include(o => o.Customer)
                 .Include(o => o.Employee)
                 .Include(o => o.OrderDetails)
-                .ThenInclude(od => od.Product) // Assuming OrderDetails has a navigation property to Product
+                .ThenInclude(od => od.Product) 
                 .Include(o => o.ShipViaNavigation)
                 .ToListAsync();
 
@@ -46,9 +46,11 @@ namespace NorthWindDB.Controllers
                 .Include(i => i.Customer)
                 .Include(i => i.Employee)
                 .Include(i => i.OrderDetails)
+                .ThenInclude(p=> p.Product)
+                .ThenInclude(p=> p.Category)
                 .Include(i => i.ShipViaNavigation)
                 .FirstOrDefault(i => i.OrderId == id);
-            var o =  _mapper.Map<OrderDTO>(f);
+            var o =  _mapper.Map<OrderDTO2>(f);
             if (o == null)
             {
                 return NotFound();

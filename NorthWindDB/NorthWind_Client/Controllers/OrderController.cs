@@ -60,5 +60,13 @@ namespace NorthWind_Client.Controllers
             return View("Index");
         }
 
+        public async Task<IActionResult> Detail(int id)
+        {
+            var client = new ClientService(HttpContext);
+            var orderdetails = await client.GetAll<Response.OrderDTO2>($"api/Order/{id}");
+            ViewBag.OrderDetails = orderdetails;
+            return View();
+        }
+
     }
 }

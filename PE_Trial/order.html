@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders Management</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1>Orders Management</h1>
+        <!-- Search form -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <label for="fromDate">From Date:</label>
+                <input type="date" id="fromDate" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <label for="toDate">To Date:</label>
+                <input type="date" id="toDate" class="form-control">
+            </div>
+            <div class="col-md-2">
+                <label></label>
+                <button id="searchBtn" class="btn btn-primary btn-block">Search</button>
+            </div>
+        </div>
+
+        <!-- Success message -->
+        <div id="successMessage"></div>
+
+        <!-- Orders list -->
+        <div id="ordersList"></div>
+    </div>
+
+    <!-- Include jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Function to fetch orders and display them
+            function fetchOrders() {
+                $.ajax({
+                    url: 'http://localhost:5000/api/Order/GetAllOrder',
+                    type: 'GET',
+                    success: function (data) {
+                        // Display orders in the UI
+                        displayOrders(data);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error fetching orders:', error);
+                    }
+                });
+            }
+
+            // Function to display orders in a table
+            function displayOrders(orders) {
+                var ordersTable = '<h2>Orders</h2>';
+                ordersTable += '<table class="table">';
+                ordersTable += '<thead>';
+                ordersTable += '<tr>';
+                ordersTable += '<th>Order ID</th>';
+                ordersTable += '<th>Customer ID</th>';
+                ordersTable += '<th>Customer Name</th>';
+                ordersTable += '<th>Employee ID</th>';
+                ordersTable += '<th>Employee Name</th>';
+                ordersTable += '<th>Employee Department ID</th>';
+                ordersTable += '<th>Employee Department Name</th>';
+                ordersTable += '<th>Order Date</th>';
+                ordersTable += '<th>Required Date</th>';
+                ordersTable += '<th>Shipped Date</th>';
+                ordersTable += '<th>Freight</th>';
+                ordersTable += '<th>Ship Name</th>';
+                ordersTable += '<th>Ship Address</th>';
+                ordersTable += '<th>Ship City</th>';
+                ordersTable += '<th>Ship Region</th>';
+                ordersTable += '<th>Ship Postal Code</th>';
+                ordersTable += '<th>Ship Country</th>';
+                ordersTable += '<th>Actions</th>'; // New column for actions
+                ordersTable += '</tr>';
+                ordersTable += '</thead>';
+                ordersTable += '<tbody>';
+                orders.forEach(function (order) {
+                    ordersTable += '<tr>';
+                    ordersTable += '<td>' + order.orderId + '</td>';
+                    ordersTable += '<td>' + order.customerId + '</td>';
+                    ordersTable += '<td>' + order.customerName + '</td>';
+                    ordersTable += '<td>' + order.employeeId + '</td>';
+                    ordersTable += '<td>' + order.employeeName + '</td>';
+                    ordersTable += '<td>' + order.employeeDepartmentId + '</td>';
+                    ordersTable += '<td>' + order.employeeDepartmentName + '</td>';
+                    ordersTable += '<td>' + new Date(order.orderDate).toLocaleDateString() + '</td>';
+                    ordersTable += '<td>' + new Date(order.requiredDate).toLocaleDateString() + '</td>';
+                    ordersTable += '<td>' + (order.shippedDate ? new Date(order.shippedDate).toLocaleDateString() : '') + '</td>';
+                    ordersTable += '<td>' + order.freight + '</td>';
+                    ordersTable += '<td>' + order.shipName + '</td>';
+                    ordersTable += '<td>' + order.shipAddress + '</td>';
+                    ordersTable += '<td>' + order.shipCity + '</td>';
+                    ordersTable += '<td>' + order.shipRegion + '</td>';
+                    ordersTable += '<td>' + order.shipPostalCode + '</td>';
+                    ordersTable += '<td>' + order.shipCountry + '</td>';
+                    // Add delete button with onclick event to call deleteCustomer function
+                    ordersTable += '<td><button class="btn btn-danger delete-btn" data-customer-id="' + order.customerId + '">Delete Customer</button></td>';
+                    ordersTable += '</tr>';
+                });
+                ordersTable += '</tbody>';
+                ordersTable += '</table>';
+                $('#ordersList').html(ordersTable);
+
+                // Attach click event to delete buttons
+                $('.delete-btn').click(function () {
+                    var customerId = $(this).data('customer-id');
+                    deleteCustomer(customerId);
+                });
+            }
+
+            // Function to delete customer
+            function deleteCustomer(customerId) {
+                $.ajax({
+                    url: 'http://localhost:5000/api/customer/delete/' + customerId,
+                    type: 'POST',
+                    success: function (data) {
+                        // If deletion successful, re-fetch orders to update the table
+                        fetchOrders();
+                        // Display success message
+                        displaySuccessMessage(data);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error deleting customer:', error);
+                    }
+                });
+            }
+
+            // Function to display success message
+            function displaySuccessMessage(data) {
+                var successMessage = '<div class="alert alert-success" role="alert">';
+                successMessage += 'Deleted Customers: ' + data.deletedCustomers + '<br>';
+                successMessage += 'Deleted Orders: ' + data.deletedOrders + '<br>';
+                successMessage += 'Deleted Order Details: ' + data.deletedOrderDetails + '<br>';
+                successMessage += '</div>';
+                $('#successMessage').html(successMessage);
+            }
+
+            // Function to search orders by date
+            $('#searchBtn').click(function () {
+                var fromDate = $('#fromDate').val();
+                var toDate = $('#toDate').val();
+                $.ajax({
+                    url: 'http://localhost:5000/api/order/getorderbydate/' + fromDate + '/' + toDate,
+                    type: 'GET',
+                    success: function (data) {
+                        // Display search results
+                        displayOrders(data);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error searching orders by date:', error);
+                    }
+                });
+            });
+
+            // Initial fetch of orders when the page loads
+            fetchOrders();
+        });
+    </script>
+</body>
+
+</html>

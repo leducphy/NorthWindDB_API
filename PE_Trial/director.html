@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directors</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Directors</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="nationalityInput" class="form-label">Nationality:</label>
+                    <input type="text" class="form-control" id="nationalityInput" placeholder="Enter nationality">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="genderInput" class="form-label">Gender:</label>
+                    <select class="form-select" id="genderInput">
+                        <option value="male" selected>Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" id="searchBtn">Search</button>
+        <div id="searchResults" class="mt-3"></div>
+        <div id="moviesList"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#searchBtn').click(function () {
+                var nationality = $('#nationalityInput').val();
+                var gender = $('#genderInput').val();
+
+                $.ajax({
+                    url: 'http://localhost:5000/api/director/GetDirectors/' + nationality + '/' + gender,
+                    method: 'GET',
+                    success: function (data) {
+                        $('#searchResults').empty();
+
+                        var tableHtml = '<table class="table">';
+                        tableHtml += '<thead>';
+                        tableHtml += '<tr>';
+                        tableHtml += '<th>Full Name</th>';
+                        tableHtml += '<th>Gender</th>';
+                        tableHtml += '<th>Date of Birth</th>';
+                        tableHtml += '<th>Nationality</th>';
+                        tableHtml += '<th>Description</th>';
+                        tableHtml += '<th>Action</th>'; // New column for the action button
+                        tableHtml += '</tr>';
+                        tableHtml += '</thead>';
+                        tableHtml += '<tbody>';
+
+                        data.forEach(function (director) {
+                            tableHtml += '<tr>';
+                            tableHtml += '<td>' + director.fullName + '</td>';
+                            tableHtml += '<td>' + director.gender + '</td>';
+                            tableHtml += '<td>' + director.dobString + '</td>';
+                            tableHtml += '<td>' + director.nationality + '</td>';
+                            tableHtml += '<td>' + director.description + '</td>';
+
+                            tableHtml += '<td><button class="btn btn-primary btn-sm view-details" data-id="' + director.id + '">View Details</button></td>';
+
+                            tableHtml += '</tr>';
+                        });
+
+                        tableHtml += '</tbody></table>';
+
+                        $('#searchResults').append(tableHtml);
+
+                        $('.view-details').click(function () {
+                            $('#moviesList').empty();
+
+                            var directorId = $(this).data('id');
+
+                            $.ajax({
+                                url: 'http://localhost:5000/api/director/GetDirector/' + directorId,
+                                method: 'GET',
+                                success: function (directorData) {
+                                    var directorHtml = '<h3>Director Details</h3>';
+                                    directorHtml += '<p><strong>Full Name:</strong> ' + directorData.fullName + '</p>';
+                                    directorHtml += '<p><strong>Gender:</strong> ' + directorData.gender + '</p>';
+                                    directorHtml += '<p><strong>Date of Birth:</strong> ' + directorData.dobString + '</p>';
+                                    directorHtml += '<p><strong>Nationality:</strong> ' + directorData.nationality + '</p>';
+                                    directorHtml += '<p><strong>Description:</strong> ' + directorData.description + '</p>';
+
+                                    $('#directorDetails').html(directorHtml);
+
+                                    var moviesHtml = '<h3>Movies Directed by ' + directorData.fullName + '</h3>';
+                                    moviesHtml += '<table class="table">';
+                                    moviesHtml += '<thead>';
+                                    moviesHtml += '<tr>';
+                                    moviesHtml += '<th>Title</th>';
+                                    moviesHtml += '<th>Release Date</th>';
+                                    moviesHtml += '<th>Description</th>';
+                                    moviesHtml += '<th>Language</th>';
+                                    moviesHtml += '</tr>';
+                                    moviesHtml += '</thead>';
+                                    moviesHtml += '<tbody>';
+
+                                    directorData.movies.forEach(function (movie) {
+                                        moviesHtml += '<tr>';
+                                        moviesHtml += '<td>' + movie.title + '</td>';
+                                        moviesHtml += '<td>' + movie.releaseDate + '</td>';
+                                        moviesHtml += '<td>' + movie.description + '</td>';
+                                        moviesHtml += '<td>' + movie.language + '</td>';
+                                        moviesHtml += '</tr>';
+                                    });
+
+                                    moviesHtml += '</tbody>';
+                                    moviesHtml += '</table>';
+
+                                    $('#moviesList').html(moviesHtml);
+                                },
+                                error: function (xhr, status, error) {
+                                    $('#directorDetails').html('<div class="alert alert-danger" role="alert">Error: ' + error + '</div>');
+                                }
+                            });
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        // Display error message
+                        $('#searchResults').html('<div class="alert alert-danger" role="alert">Error: ' + error + '</div>');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

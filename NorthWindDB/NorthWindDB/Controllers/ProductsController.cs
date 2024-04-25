@@ -54,6 +54,8 @@ namespace NorthWindDB.Controllers
         }
 
         [HttpPost]
+        [Produces("application/xml")]
+        [Consumes("application/json")]
         public async Task<ActionResult<ProductDTO>> AddProduct([FromBody] AddProductDTO apd)
         {
             var c = _context.Categories.FirstOrDefault(c => c.CategoryId == apd.CategoryID)!;

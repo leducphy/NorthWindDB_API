@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PE_Trial", "PE_Trial\PE_Trial.csproj", "{8994C18C-CD1B-43F1-A8F4-DA320CBFDD21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PE_Trial", "PE_Trial\PE_Trial.csproj", "{8994C18C-CD1B-43F1-A8F4-DA320CBFDD21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PE_PRN_Fall22B1", "PE_PRN_Fall22B1\PE_PRN_Fall22B1.csproj", "{251F1CB0-0012-474D-9C43-25D946F9F8BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{8994C18C-CD1B-43F1-A8F4-DA320CBFDD21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8994C18C-CD1B-43F1-A8F4-DA320CBFDD21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8994C18C-CD1B-43F1-A8F4-DA320CBFDD21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{251F1CB0-0012-474D-9C43-25D946F9F8BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{251F1CB0-0012-474D-9C43-25D946F9F8BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{251F1CB0-0012-474D-9C43-25D946F9F8BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{251F1CB0-0012-474D-9C43-25D946F9F8BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PE_Trial.AutoMapper;
-using PE_Trial.Models;
 using System.Text.Json.Serialization;
+using PE_Trial.Models;
 
 namespace PE_Trial
 {
@@ -13,16 +13,16 @@ namespace PE_Trial
 
             // Add services to the container.
 
-            builder.Services.AddControllers().AddJsonOptions(options =>
-            {
-                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-                options.JsonSerializerOptions.WriteIndented = true;
-            });
+            builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddDbContext<PE_PRN_Fall22B1Context>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddDbContext<PRN_Sum22_B1Context>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(typeof(AutoMapperProflile));
+            builder.Services.AddCors(policy =>
+            {
+                policy.AddPolicy("AllowAll", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
 
             var app = builder.Build();
 
@@ -33,7 +33,7 @@ namespace PE_Trial
                 app.UseSwaggerUI();
             }
             app.UseAuthorization();
-
+            app.UseCors("AllowAll");
 
             app.MapControllers();
 

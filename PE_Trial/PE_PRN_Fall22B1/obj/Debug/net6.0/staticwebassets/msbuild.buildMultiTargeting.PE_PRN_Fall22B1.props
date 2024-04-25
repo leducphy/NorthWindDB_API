@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\PE_PRN_Fall22B1.props" />
+</Project>

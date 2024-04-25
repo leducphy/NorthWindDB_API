@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "3jLRAkuaI1eNxypDT1dFxLhEPxFCjuZi0PyQH0F2JyV5kdBoq7xUFtPaMny3yRDPFgP95x9fGGSzxcCPDuwkHQ==",
+  "success": true,
+  "projectFilePath": "D:\\PRN231\\NorthWind\\NorthWind_Client\\NorthWind_Client.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\leducphi\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

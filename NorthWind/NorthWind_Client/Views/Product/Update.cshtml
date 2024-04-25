@@ -1,0 +1,35 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using NorthWind_Client.Models
+@{
+    var categories = ViewBag.Categories as List<CategoryDTO>;
+}
+
+<h2>Edit Product</h2>
+
+<form asp-action="Update" asp-controller="Product" method="post">
+    <input type="hidden" name="productid" value="@Model.Id"/>
+    <div class="mb-3">
+        <label  class="form-label">Name:</label>
+        <input  class="form-control" value="@Model.Name" name="product.Name"/>
+        <span  class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label  class="form-label">Price:</label>
+        <input  class="form-control" value="@Model.Price" name="product.Price"/>
+        <span  class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="categoryDropdown" class="form-label">Select Category:</label>
+        @{
+        var selectedCategoryId = Model.CategoryId;
+        }
+        <select id="categoryDropdown" class="form-select" name="product.CategoryId">
+            @foreach (var item in categories)
+            {
+            var isSelected = item.Id == selectedCategoryId ? "selected" : "";
+            <option value="@item.Id" selected="@isSelected">@item.Name</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
